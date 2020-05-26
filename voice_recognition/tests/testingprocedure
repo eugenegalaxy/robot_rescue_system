@@ -1,0 +1,12 @@
+1. Get the latest version of DNS - hugo branch (not master)
+
+2. Navigate to the the SpeechRecognition folder under dns_main
+
+3. Follow the README file, if there is any issues, contact me and I will help
+
+4. Make sure that you have approximately 15 minutes time where its quiet around you. Change line 137 to your name and language code e.g. git Test_speech('da', 'Jesper') and replace the first keyword in the list ( line 65 or 67 or 69 - depending on language )
+
+5. Start the test (python3 VoiceRecognition_test.py) speak loud and clear sentences where the keyword should be within. You can follow the progress in the terminal if you like. After 100 attempts, the program will terminate and print the words your successes on and failures, this 2 lines, copy and paste into the testing folder _ speech recognition in our google drive. Here you can also leave comments if there was something you would like to address
+
+
+6. A logger is also implemented, all your attempts will be stored, send them to me when done :) 

@@ -1,0 +1,19 @@
+2020-05-20 20:50:44,865 :: Number of attempts:
+2020-05-20 20:50:44,866 :: 101
+2020-05-20 20:50:44,866 :: Sucsess:
+2020-05-20 20:50:44,866 :: Counter({'wednesday': 13, 'saturday': 12, 'stomach': 8, 'abdomen': 8, 'school': 7, 'chest': 6, 'office': 6, 'hand': 6, 'yes': 5, 'earthquake': 4, 'home': 4, 'head': 3, 'friday': 3, 'no': 2, 'hugo': 1})
+2020-05-20 20:50:44,866 :: Failure:
+2020-05-20 20:50:44,866 :: Counter({'hugo': 3, 'school': 1, 'earthquake': 1, 'home': 1, 'chest': 1, 'saturday': 1, 'abdomen': 1})
+2020-05-20 20:50:44,866 :: No detection:
+2020-05-20 20:50:44,866 :: Counter({'saturday': 1, 'yes': 1, 'chest': 1})
+
+2020-05-20 21:21:52,192 :: Number of attempts:
+2020-05-20 21:21:52,192 :: 101
+2020-05-20 21:21:52,192 :: Sucsess:
+2020-05-20 21:21:52,192 :: Counter({'mage': 11, 'fredag': 10, 'skola': 7, 'huvud': 7, 'hugo': 7, 'ja': 6, 'hem': 6, 'bröst': 5, 'hand': 5, 'onsdag': 4, 'jordbävning': 4, 'kontor': 4, 'nej': 4, 'buk': 4, 'lördag': 3})
+2020-05-20 21:21:52,192 :: Failure:
+2020-05-20 21:21:52,193 :: Counter({'jordbävning': 2, 'kontor': 2, 'hugo': 1, 'buk': 1})
+2020-05-20 21:21:52,193 :: No detection:
+2020-05-20 21:21:52,193 :: Counter({'hugo': 2, 'lördag': 1, 'jordbävning': 1, 'buk': 1, 'mage': 1, 'onsdag': 1})
+
+
