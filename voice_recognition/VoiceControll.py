@@ -5,11 +5,10 @@ from gtts import gTTS
 import os 
 import speech_recognition as sr
 import time
-from InternetTest import *
-#from keyboardControll import *
+#from InternetTest import *
+from keyboardControll import *
 from googletrans import Translator
-from OfflineVoice import *
-
+#from OfflineVoice import *
 
 def recognize_speech_from_mic(recognizer, microphone, lang):
 
@@ -59,12 +58,12 @@ def recognize_speech_from_mic(recognizer, microphone, lang):
         response["error"] = "API unavailable"
         if response["error"] == "API unavailable":
             print("Oh Shit")
-            time.sleep(0.1)
+            time.sleep(4)
             Offline = True
-            if Offline == True: 
-                response["transcription"] = OfflineVoice()
-                #print("Something funny")
-                
+            while Offline == True: 
+                OfflineVoice()
+                print("Something funny")
+            
 
     except sr.UnknownValueError:
         # speech was unintelligible
@@ -79,7 +78,7 @@ def motion_speech(lang, name):
     microphone = sr.Microphone()
     translator = Translator()
     translated = translator.translate('Hello', dest=lang)
-    mytext = translated.text + ' ' + name 
+    mytext =   name + ' ' + 'If you see any other victims, please guide me there, you can control me by saying backward, forward, right, left and stop' 
     language = lang
     myobj = gTTS(text=mytext, lang=language, slow=False) 
     myobj.save("welcome.mp3") 
@@ -87,19 +86,14 @@ def motion_speech(lang, name):
     while(1): 
         while (1):
             while (1):	
-                Connection = CheckingConnectionToGoogle()
-                if Connection[0] == True: 
-                    print(Connection, "Connected")
 
-                elif Connection == False:
-                    print("Connection lost")
                 print("Recording Message")
                 if lang == 'da':
                     guess = recognize_speech_from_mic(recognizer, microphone, 'da-DK')
                 elif lang == 'sv':
                     guess = recognize_speech_from_mic(recognizer, microphone, 'sv-SE')
-                elif lang == 'ru':
-                    guess = recognize_speech_from_mic(recognizer, microphone, 'ru_RU')
+                elif lang == 'bs':
+                    guess = recognize_speech_from_mic(recognizer, microphone, 'sr-RS')
                 else :
                     guess = recognize_speech_from_mic(recognizer, microphone, 'en-UK')
                 if guess["transcription"]:
@@ -117,27 +111,27 @@ def motion_speech(lang, name):
             print("You said: {}".format(guess["transcription"]))
             message = guess["transcription"].lower() 
             #### Fun #####
-            mytext = "You said" + "      " + message
-            myobj = gTTS(text=mytext, lang=language, slow=False) 
-            myobj.save("welcome.mp3") 
-            os.system("mpg321 -q welcome.mp3")  
+            #mytext = "You said" + "      " + message
+            #myobj = gTTS(text=mytext, lang=language, slow=False) 
+            #myobj.save("welcome.mp3") 
+            #os.system("mpg321 -q welcome.mp3")  
             ### No More Fun ###
-            translated_stop = translator.translate('STOPP' , dest=lang)
+            translated_stop = translator.translate('stop' , dest=lang)
             stop =[translated_stop.text.lower()]
             print(stop)
-            translated_forward = translator.translate('FRAMÅT' , dest=lang)
+            translated_forward = translator.translate('forward' , dest=lang)
             forward =[translated_forward.text.lower()]
             print(forward)
-            translated_backward = translator.translate('TILLBAKA' , dest=lang)
+            translated_backward = translator.translate('backward' , dest=lang)
             backward =[translated_backward.text.lower()]
             print(backward)
-            translated_dance = translator.translate('DANCE' , dest=lang)
+            translated_dance = translator.translate('dance' , dest=lang)
             dance =[translated_dance.text.lower()]
             print(dance)
-            translated_right = translator.translate('HÖGER' , dest=lang)
+            translated_right = translator.translate('right' , dest=lang)
             right =[translated_right.text.lower()]
             print(right)
-            translated_left = translator.translate('VÄNSTER' , dest=lang)
+            translated_left = translator.translate('left' , dest=lang)
             left =[translated_left.text.lower()]
             print(left)
 
@@ -145,23 +139,23 @@ def motion_speech(lang, name):
             if left[0] in message:
                 message = 'left'
                 stoping = False
+                motion = PushF, LiftLE, DownLE, ForwardLE
                 break
-                #motion = PushF, LiftLE, DownLE, ForwardLE
             elif right[0] in message: 
                 message = 'right'
                 stoping = False
+                motion = PushF, LiftRI, DownRI, ForwardRI
                 break
-                #motion = PushF, LiftRI, DownRI, ForwardRI
             elif forward[0] in message:
                 stoping = False
                 message = 'forward' 
+                motion = PushF, LiftF, DownF, ForwardF
                 break
-                #motion = PushF, LiftF, DownF, ForwardF
             elif backward[0] in message:
                 stoping = False 
                 message = 'backward'
+                motion = PushF, LiftBW, DownBW, ForwardBW
                 break
-                #motion = PushF, LiftBW, DownBW, ForwardBW
             elif dance[0] in message:
                 message = 'dance'
             
@@ -179,20 +173,20 @@ def motion_speech(lang, name):
         while (stoping == False):
             while (1): 
                 print("alright im here")
-                #move(motion[0],motion[1],motion[2],motion[3])
+                move(motion[0],motion[1],motion[2],motion[3])
                 print("Recording Message")
                 guess = recognize_speech_from_mic(recognizer, microphone,lang)
                 print(guess)
                 if guess["transcription"]:
                     break
                 if not guess["success"]:
-                    #move(motion[0],motion[1],motion[2],motion[3])
+                    move(motion[0],motion[1],motion[2],motion[3])
                     print("I didn't catch that. What did you say?\n")
                     break
                 # if there was an error, stop
             if guess["error"]:
                 print("ERROR: {}".format(guess["error"]))
-                #move(motion[0],motion[1],motion[2],motion[3])
+                move(motion[0],motion[1],motion[2],motion[3])
                 break
             print("You said: {}".format(guess["transcription"]))
             message = guess["transcription"].lower() 
@@ -212,8 +206,8 @@ def motion_speech(lang, name):
 if __name__ == "__main__":
     #Standing up and storing values for motions
     #Stand_up()
-    #PushF, LiftF, DownF, ForwardF, LiftBW, DownBW, ForwardBW, LiftLE, DownLE, ForwardLE, LiftRI, DownRI, ForwardRI, LiftTactile = CalculationMotions()
-    motion_speech('en', 'Rebecca ')
+    PushF, LiftF, DownF, ForwardF, LiftBW, DownBW, ForwardBW, LiftLE, DownLE, ForwardLE, LiftRI, DownRI, ForwardRI, LiftTactile = CalculationMotions()
+    motion_speech('en', 'Hugo ')
 
 
 
