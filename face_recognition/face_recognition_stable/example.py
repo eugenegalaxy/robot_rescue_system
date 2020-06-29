@@ -9,7 +9,7 @@ import time
 # elif '/opt/ros/kinetic/lib/python2.7/dist-packages' in sys.path:
 #     sys.path.remove('/opt/ros/kinetic/lib/python2.7/dist-packages')
 time_import_start = time.time()
-from face_recognition.face_verification import FaceVerification
+from face_recognition.FaceVerification import FaceVerification
 time_import_stop = time.time()
 
 PRINT_EXECUTION_TIMES = False
@@ -22,7 +22,7 @@ def verify_target(database, img_mode, target=None, ):
 
     # STEP 2: Initilalise photo database
     time1 = time.time()
-    FV.initdb_and_classifier(database)
+    FV.initialiseDatabase(database)
     time1_stop = time.time()
     # FV.plot_TSNE(FV.db_metadata, FV.db_features)
     # STEP 3: Choose image acquisition mode (RECOMMENDED Mode 2)
@@ -31,9 +31,9 @@ def verify_target(database, img_mode, target=None, ):
     # STEP 4: Run the face verifier!
     time2 = time.time()
     if img_mode == 2:
-        info, images = FV.Predict(directory_path=target, plot=1)
+        info, images = FV.Predict(directory_path=target)
     elif img_mode == 1:
-        info, images = FV.Predict(single_img_path=target, plot=1)
+        info, images = FV.Predict(single_img_path=target)
     elif img_mode == 0:
         info, images = FV.Predict()
     else:
@@ -89,16 +89,12 @@ if __name__ == "__main__":
     dir_path_4 = path + '/face_recognition/images/new_entries/hugo_markoff'
     dir_path_5 = path + '/face_recognition/images/new_entries/arnold'
     dir_path_6 = path + '/face_recognition/images/new_entries/jevgenijs_galaktionovs/image_0001.jpg'
-    dir_path_7 = path + '/face_recognition/images/eugene_victim/eugene'
-    dir_path_8 = path + '/face_recognition/images/eugene_victim/eugene/P_20200524_204933.jpg'
-    dir_path_9 = path + '/face_recognition/images/eugene_victim/eugene/P_20200524_205022.jpg'
-    
 
     ALL_FROM_DIRECTORY = 2
     SINGLE_IMAGE_PATH = 1
     FRESH_IMAGE = 0
 
-    tg_info, tg_images, times = verify_target(db_1, SINGLE_IMAGE_PATH, target=dir_path_9)
+    tg_info, tg_images, times = verify_target(db_2, ALL_FROM_DIRECTORY, target=dir_path_4) 
     print_tg_info(tg_info)
 
     time_main_stop = time.time()
@@ -109,7 +105,7 @@ if __name__ == "__main__":
         print('\n========================= Execution Times ===========================')
         print('Module imports executed in {0:1.2f} seconds.'.format(impo_time))
         print('FV = FaceVerification() executed in {0:1.2f} seconds.'.format(times[0]))
-        print('FV.initdb_and_classifier() executed in {0:1.2f} seconds.'.format(times[1]))
+        print('FV.initialiseDatabase() executed in {0:1.2f} seconds.'.format(times[1]))
         print('FV.predict() executed in {0:1.2f} seconds.'.format(times[2]))
         print('Program executed in {0:1.2f} seconds.'.format(main_time))
         print('Total time is {0:1.2f} seconds.'.format(impo_time + main_time))
